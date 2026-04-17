@@ -1,0 +1,52 @@
+<feature>
+<l1>
+    Block-based editor
+    <p> The single most addictive part of Notion. Every paragraph, image, checklist, code block, embed, etc. is a draggable, nestable, transformable block. This is what makes Notion infinitely flexible. Implement this first — it’s the foundation.</p>
+</l1>
+
+<l2>
+    All-in-one workspace
+    <p> Notes + Tasks + Wikis + Databases live together in one fluid place. Users never have to switch apps. This “everything in one place” feeling is Notion’s biggest retention driver.</p>
+</l2>
+
+<l3>
+    Databases with multiple views
+    <p>Same data shown as Table, Kanban, Calendar, Gantt, List, Gallery, Timeline. This is Notion’s killer feature for power users. One database can power projects, CRM, knowledge base, OKRs — everything.</p>
+</l3>
+
+<l4>
+    Rich properties + Relations + Rollups + Formulas
+    <p>Dates, tags, people, checkboxes, formulas, linked databases (relations), and rollups (pull data from other databases). This turns Notion from a note app into a lightweight Airtable/Notion hybrid.</p>
+</l4>
+
+<l5>
+    Real-time collaboration + Suggested Edits
+    <p>Multiple people editing the same page at the same time + track-changes-style suggestions. The collaboration experience is smoother than Google Docs for most teams.</p>
+</l5>
+
+<l6>
+    Notion AI (Cross-app intelligence + Agent + Skills)
+    <p>AI that can search Slack, GitHub, Jira, Gmail, Linear, Google Drive and your workspace. The Notion Agent that can edit pages, draft updates, run saved workflows (“Skills”), summarize meetings, analyze PDFs. This is the 2025–2026 differentiator.</p>
+</l6>
+
+<l7>
+    Templates + Drag-and-drop layouts
+    <p>Hundreds of ready-made templates + complete visual freedom to rearrange any block/database. Users can go from zero to a full workspace in minutes.</p>
+</l7>
+
+<l8>Conditional logic Forms
+    <p>Beautiful forms with branching logic whose responses automatically create database rows. Huge for onboarding, support, intake processes.</p>
+</l8>
+
+<l9>
+    Notion Calendar + Two-way Database sync
+    <p>Native calendar that bi-directionally syncs with any database. Edit a task in the calendar → it updates the database and vice versa. Smart booking links with conflict detection.</p>
+</l9>
+
+<l10>
+    Automations (Buttons + Webhooks + MCP integrations)
+    <p>One-click buttons that trigger notifications, Zapier/Make workflows, or custom AI agents (n8n MCP, Figma MCP, etc.). Turns static pages into active tools.</p>
+</l10>
+</feature>
+
+

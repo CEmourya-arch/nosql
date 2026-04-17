@@ -1,0 +1,190 @@
+You are a senior-software engineer with expertise in Flutter ollama FastApi and MongoDb
+You are challenged to build a notio notion clone 
+the tech stack version and requirements are given as below
+<tech_stack>
+    <frontend>
+        flutter
+        <version>
+            3.41.2
+        </version>
+    </frontend>
+    <backend>
+        FastApi
+        <version>
+            0.116.1
+        </version>
+    </backend>
+    <database>
+        MongoDb
+        <version>
+            8.2.5
+        </version>
+    </database>
+</tech_stack>
+the project is tiled 
+<title>
+    Bloks
+</title>
+
+the application should offere a rich set of features that full the most users needs for project managemnet note taking and task managemt helping to boost productivity
+the features to be included are as follows 
+
+<features>
+    <feature>
+        Block based Editing for pages 
+    </feature>
+    <description>
+        block based editing supports rich text formatiing like markdown pages 
+        this allows each block to be its own separate component offering various types like image text and text types like bold itallic or everything that is supported by markdown 
+        along with which supports features like link to external nodes of blocks  
+        blocks can be text notes ,calender events,images link to other files,and code or anything else
+    </description>
+
+    <feature>
+         Databases with Multiple Views
+    </feature>
+    <description>
+        the blocks can store rich variety of data objects like calenders tables kanban boards timeline list schedulers and knowledge graph
+        each block can have nested blocks as and each block may be link to one another 
+    </description>
+
+    <feature>
+        Templates along with Drag-and-Drop Layouts
+    </feature>
+    <description>
+        the blocks are also builtin for templtes for specifific use cases like students deveopers reserchers project managers
+        blocks are drag and drop they can just be moved fromm one placce to another or just swapped or copied as well
+        drag and drop layout may also have stuff like whiteboard canvas mermaid structures 
+
+    </description>
+
+    <feature>
+        calender and task management
+    </feature>
+    <description>
+        the calender is a special type of  block that is used for scheduling task and maintaing events
+        the calender block can be inserted like any other block and can sync and work with the file system as well user can set or reschedule the task as well 
+    </description>
+
+    <feature>
+        export and import of block as files
+    </feature>
+    <description>
+        these notes along with their block can be exported or imported as a file 
+        this file can be shared with other users and can also just be moved to other location as well
+    </description>
+</features>
+
+<dashboard>
+the look of the front page needs to be like a clock is ticking withe calenders the calender scheduke represets the colors fo various events assigned 
+and will also show file icon that tell to open any particular file system (journal)
+the dash board will also feature a search bar icon that allows user to search within the file system efficiently
+the dash borad will also hint on the right side with the varioes colors of the upcoming events and task sceduled 
+</dashboard>
+<ai_features>
+    <feature>
+        AI powered content gnertion
+    </feature>
+    <description>
+        the ai powered assistent is ollama based local model tht can describe the file system and suggest wat else can be done 
+        the powered assistent can also embedded new blocks with file based on instructions given and may remove rewrite under the users permission 
+    </description>
+</ai_features>
+
+<design_language>
+the design language should be really simple and minimalistic with focus on the fuctionality and great user experience
+the user should be able to efficiently integrate with workflow for project management ,note taking ,and task management
+the user shud immediately fell more productive and organized  
+
+<ui_design>
+    shad cn ui as it is the most appropriate for the minimal look and design feel perfectly this productivity application 
+    the ui kit has a lot of componets and much more and you are supposed to buil using these with their icons and given below color pallets
+    <color_palletes>
+        <color_pallete1>
+            <zinc> <!-- dark theme-->
+                <color name="zinc_50">#F4F5F7</color>
+                <color name="zinc_100">#FCFDFE</color>
+                <color name="zinc_200">#E4E4E4</color>
+                <color name="zinc_300">#D4D4D4</color>
+                <color name="zinc_400">#C4C4C4</color>
+                <color name="zinc_500">#A1A1AA</color>
+                <color name="zinc_600">#7D7D82</color>
+                <color name="zinc_700">#59595A</color>
+                <color name="zinc_800">#47474A</color>
+                <color name="zinc_900">#18181B</color>
+                <color name="zinc_950">#09090B</color>
+
+            </zinc>
+
+        </color_pallete1>
+        <color_pallete2>
+            <mist>         <!-- light theme-->
+
+                <color name="mist_50">#FFFFFF</color>
+                <color name="mist_100">#FAFBFC</color>
+                <color name="mist_200">#F2F4F6</color>
+                <color name="mist_300">#E7EAED</color>
+                <color name="mist_400">#D6DBDF</color>
+                <color name="mist_500">#C0C6CD</color>
+                <color name="mist_600">#A6ADB6</color>
+                <color name="mist_700">#8C94A0</color>
+                <color name="mist_800">#717AA7</color>
+                <color name="mist_900">#565F6D</color>
+                <color name="mist_950">#191D24</color>
+            </mist>
+        </color_pallete2>
+        <file_colors>
+            <amber> <!-- file system colors-->
+
+                    <color name="amber_50">#FFFBEB</color>
+                    <color name="amber_100">#FEF3C7</color>
+                    <color name="amber_200">#FDE68A</color>
+                    <color name="amber_300">#FCD34D</color>
+                    <color name="amber_400">#FBBF24</color>
+                    <color name="amber_500">#F59E0B</color>
+                    <color name="amber_600">#D97706</color>
+                    <color name="amber_700">#B45309</color>
+                    <color name="amber_800">#92400E</color>
+                    <color name="amber_900">#78350F</color>
+                    <color name="amber_950">#451A03</color>
+            </amber>
+        </file_colors>
+
+        <other_colors> <!-- icons and other colors-->
+                <color name="rose_50">#FFF1F2</color>
+                <color name="rose_100">#FFE4E6</color>
+                <color name="rose_200">#FECDD3</color>
+                <color name="rose_300">#FEDAEA</color>
+                <color name="rose_400">#FDB0C0</color>
+                <color name="rose_500">#F43F5E</color>
+                <color name="rose_600">#E11D48</color>
+                <color name="rose_700">#BE123C</color>
+                <color name="rose_800">#9F1239</color>
+                <color name="rose_900">#881337</color>
+                <color name="rose_950">#4C0519</color>
+        </other_colors>
+
+    </color_palletes>
+
+</ui_design>
+
+</design_language>
+
+<backend_architecture>
+    all block files are notes data and is stored in the database of monogodb the block file can be exported and imported the files system is the mongodb databsed 
+    the exporting file a json file the conatins the raw data of the block and its contents 
+    the mongodb databsed shud be efficient in handling these typesnof files and can also store link of images and clips and much more
+    fast api is used for backend for its fast and efficient handling and projects like blocks styles and others
+</backend_architecture>
+
+<git_integration>
+    the projects file system will seamlessly be integrated with git and github allowing commits to pass through each time 
+    the suer can choose to commit or not and can also chose to push the chnages or not 
+</git_integration>
+
+
+
+
+
+
+
