@@ -8,24 +8,52 @@ import '../../../core/app_colors.dart';
 import '../providers/editor_provider.dart';
 import '../../../services/export_service.dart';
 
-class EditorScreen extends ConsumerWidget {
+class EditorScreen extends ConsumerStatefulWidget {
   final String pageId;
   const EditorScreen({super.key, this.pageId = 'new_page'});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final page = ref.watch(editorProvider(pageId));
-    final notifier = ref.read(editorProvider(pageId).notifier);
+  ConsumerState<EditorScreen> createState() => _EditorScreenState();
+}
+
+class _EditorScreenState extends ConsumerState<EditorScreen> {
+  late TextEditingController _titleController;
+
+  @override
+  void initState() {
+    super.initState();
+    final page = ref.read(editorProvider(widget.pageId));
+    _titleController = TextEditingController(text: page.title);
+  }
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final page = ref.watch(editorProvider(widget.pageId));
+    final notifier = ref.read(editorProvider(widget.pageId).notifier);
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
+    // Keep title controller in sync if page title changes from elsewhere
+    if (_titleController.text != page.title) {
+      _titleController.text = page.title;
+    }
+
     return Scaffold(
+      backgroundColor: isDark ? AppColors.zinc950 : Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         leading: IconButton(
-          icon: const Icon(LucideIcons.chevronLeft),
+          icon: Icon(LucideIcons.chevronLeft, color: isDark ? Colors.white : Colors.black),
           onPressed: () => Navigator.pop(context),
         ),
         title: TextField(
-          controller: TextEditingController(text: page.title),
+          controller: _titleController,
           onChanged: (val) => notifier.updateTitle(val),
           decoration: const InputDecoration(
             hintText: 'Untitled',
@@ -33,61 +61,66 @@ class EditorScreen extends ConsumerWidget {
           ),
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.bold,
+            color: isDark ? Colors.white : Colors.black,
           ),
         ),
         actions: [
           IconButton(
             icon: const Icon(LucideIcons.sparkles, color: AppColors.rose500),
-            onPressed: () {
-              // TODO: AI Assistant integration
-            },
+            onPressed: () {},
           ),
           IconButton(
-            icon: const Icon(LucideIcons.share),
+            icon: Icon(LucideIcons.share, color: isDark ? Colors.white70 : Colors.black54),
             onPressed: () async {
               final path = await ExportService().exportPageAsJson(page);
-              if (context.mounted) {
+              if (mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Exported to $path')),
                 );
               }
             },
           ),
-          IconButton(
-            icon: const Icon(LucideIcons.moreVertical),
-            onPressed: () {},
-          ),
         ],
       ),
-      body: Column(
+      body: Stack(
         children: [
-          if (page.coverImage != null)
-            Container(
-              height: 150,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(page.coverImage!),
-                  fit: BoxFit.cover,
-                ),
+          // Canvas background
+          if (!isDark)
+            Positioned.fill(
+              child: CustomPaint(
+                painter: GridPainter(gridColor: Colors.grey.withOpacity(0.05)),
               ),
             ),
-          Expanded(
-            child: BlockListView(
-              blocks: page.blocks,
-              onBlocksChanged: (newBlocks) {
-                // Since BlockListView handles reordering internally via onReorder, 
-                // we can just update the whole list if needed, but the provider handles it.
-              },
-              onReorder: (oldIndex, newIndex) => notifier.reorderBlocks(oldIndex, newIndex),
-              onBlockChanged: (block) => notifier.updateBlock(block),
-            ),
+          Column(
+            children: [
+              if (page.coverImage != null)
+                Container(
+                  height: 150,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(page.coverImage!),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              Expanded(
+                child: BlockListView(
+                  pageId: widget.pageId,
+                  blocks: page.blocks,
+                  onBlocksChanged: (newBlocks) {},
+                  onReorder: (oldIndex, newIndex) => notifier.reorderBlocks(oldIndex, newIndex),
+                  onBlockChanged: (block) => notifier.updateBlock(block),
+                ),
+              ),
+            ],
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showBlockPicker(context, notifier),
         backgroundColor: AppColors.rose500,
+        elevation: 4,
         child: const Icon(LucideIcons.plus, color: Colors.white),
       ),
     );
@@ -151,7 +184,31 @@ class EditorScreen extends ConsumerWidget {
       case BlockType.calendar: return const Icon(LucideIcons.calendar);
       case BlockType.code: return const Icon(LucideIcons.code);
       case BlockType.bulletedList: return const Icon(LucideIcons.list);
+      case BlockType.kanban: return const Icon(LucideIcons.columns);
+      case BlockType.table: return const Icon(LucideIcons.table);
       default: return const Icon(LucideIcons.box);
     }
   }
+}
+
+class GridPainter extends CustomPainter {
+  final Color gridColor;
+  GridPainter({required this.gridColor});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = gridColor
+      ..strokeWidth = 1;
+
+    for (double i = 0; i < size.width; i += 40) {
+      canvas.drawLine(Offset(i, 0), Offset(i, size.height), paint);
+    }
+    for (double i = 0; i < size.height; i += 40) {
+      canvas.drawLine(Offset(0, i), Offset(size.width, i), paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
