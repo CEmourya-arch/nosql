@@ -1,0 +1,3 @@
+flutter run -d web-server
+
+uvicorn main:app --reload
